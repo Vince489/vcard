@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        canvas {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <label for="text-input">Enter text:</label>
+    <input type="text" id="text-input" placeholder="Enter text">
+    <button onclick="generateQRCode()">Generate QR Code</button>
+</div>
+
+<canvas id="qrcode"></canvas>
+
+<script>
+    function generateQRCode() {
+        const textInput = document.getElementById('text-input').value;
+        const qrcodeCanvas = document.getElementById('qrcode');
+
+        if (textInput.trim() !== '') {
+            const qrCodeData = generateQRCodeData(textInput);
+            drawQRCode(qrCodeData, qrcodeCanvas);
+        }
+    }
+
+    function generateQRCodeData(text) {
+        // Implement the QR code generation algorithm here
+        // This is a simplified example, and a complete implementation is more complex
+        // You would need to encode data, apply error correction, and generate the matrix
+
+        // Example: Just creating a simple matrix for demonstration
+        const matrixSize = 5;
+        const qrCodeData = [];
+
+        for (let i = 0; i < matrixSize; i++) {
+            const row = [];
+            for (let j = 0; j < matrixSize; j++) {
+                row.push(Math.random() > 0.5 ? 1 : 0); // Simulating black and white modules
+            }
+            qrCodeData.push(row);
+        }
+
+        return qrCodeData;
+    }
+
+    function drawQRCode(qrCodeData, canvas) {
+        const ctx = canvas.getContext('2d');
+        const moduleSize = 10; // Size of each module (square)
+
+        canvas.width = qrCodeData[0].length * moduleSize;
+        canvas.height = qrCodeData.length * moduleSize;
+
+        for (let i = 0; i < qrCodeData.length; i++) {
+            for (let j = 0; j < qrCodeData[i].length; j++) {
+                const color = qrCodeData[i][j] ? 'black' : 'white';
+                ctx.fillStyle = color;
+                ctx.fillRect(j * moduleSize, i * moduleSize, moduleSize, moduleSize);
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

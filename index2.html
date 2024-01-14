@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vCard Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .download-btn {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>vCard Generator</h1>
+
+    <!-- Sample vCard data -->
+    <pre>
+BEGIN:VCARD
+VERSION:3.0
+FN:Vincent Price
+TEL:+18635551234
+EMAIL:vince.price@example.com
+END:VCARD
+    </pre>
+
+    <!-- Create a download link -->
+    <a href="#" id="download-link" class="download-btn" onclick="downloadVCard()">Download vCard</a>
+</div>
+
+<script>
+    function downloadVCard() {
+        // Sample vCard data
+        const vCardData = `
+BEGIN:VCARD
+VERSION:3.0
+FN:Vincent Price
+TEL:+18635551234
+EMAIL:vince.price@example.com
+END:VCARD
+`;
+
+        // Create a Blob with vCard data
+        const blob = new Blob([vCardData], { type: 'text/vcard' });
+
+        // Create a download link
+        const downloadLink = document.createElement('a');
+        downloadLink.href = window.URL.createObjectURL(blob);
+        downloadLink.download = 'contact.vcf';
+
+        // Trigger the download
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+    }
+</script>
+
+</body>
+</html>

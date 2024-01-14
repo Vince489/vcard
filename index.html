@@ -3,30 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>vCard Generator</title>
+    <title>Your Business Card</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            margin: 0;
+            /* padding: 0;
+            box-sizing: border-box; */
+            font-family: 'Arial', sans-serif;
             background-color: #f4f4f4;
-            text-align: center;
-            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
+        .card {
+            /* max-width: 300px; */
+            width: 100%;
+            /* max-height: 600px; */
+            height: 100%;
             background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .profile-pic {
+            max-width: 60%;
+            border-radius: 50%;
+            margin-bottom: 15px;
         }
 
         h1 {
+            margin: 10px 0;
             color: #333;
         }
 
+        p {
+            color: #666;
+        }
+
         .download-btn {
-            background-color: #4caf50;
+            background-color: #4c84af;
             color: #fff;
             padding: 10px 20px;
             font-size: 16px;
@@ -35,53 +54,52 @@
             display: inline-block;
             margin-top: 20px;
         }
+
+        .qrc {
+          padding: 20px;
+          width: 100px;
+          height: 100px;
+        }
     </style>
 </head>
 <body>
+    <div class="card">
+        <img src="https://virtronesports.com/img/Stallion.png" alt="Profile Picture" class="profile-pic">
+        <h1>DeLisa Bonaparte</h1>
+        <p>Mental Health Counselor</p>
+        <h2>Patricia's Rock</h2>
+        <p>Contact: your.email@example.com</p>
+        <p>Phone: (123) 456-7890</p>
+        <p>Website: www.yourwebsite.com</p>
+        <!-- Create a download link -->
+        <div>
+          <img class="qrc" src="/qrc.png" alt="QRC">
+        </div>
 
-<div class="container">
-    <h1>vCard Generator</h1>
+        <a href="#" id="download-link" class="download-btn" onclick="downloadVCard()">Add to Contacts</a>
 
-    <!-- Sample vCard data -->
-    <pre>
-BEGIN:VCARD
-VERSION:3.0
-FN:Vincent Price
-TEL:+18635551234
-EMAIL:vince.price@example.com
-END:VCARD
-    </pre>
+    </div>
 
-    <!-- Create a download link -->
-    <a href="#" id="download-link" class="download-btn" onclick="downloadVCard()">Download vCard</a>
-</div>
-
-<script>
-    function downloadVCard() {
-        // Sample vCard data
-        const vCardData = `
-BEGIN:VCARD
-VERSION:3.0
-FN:Vincent Price
-TEL:+18635551234
-EMAIL:vince.price@example.com
-END:VCARD
-`;
-
-        // Create a Blob with vCard data
-        const blob = new Blob([vCardData], { type: 'text/vcard' });
-
-        // Create a download link
-        const downloadLink = document.createElement('a');
-        downloadLink.href = window.URL.createObjectURL(blob);
-        downloadLink.download = 'contact.vcf';
-
-        // Trigger the download
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
-    }
-</script>
-
+    <script>
+      function downloadVCard() {
+          // vCard data with PHOTO property pointing to the profile picture URL
+          const vCardData = `BEGIN:VCARD\nVERSION:3.0\nFN:DeLisa Bonaparte\nORG:Patricia's Rock\nEMAIL:your.email@example.com\nTEL:(123) 456-7890\nURL:www.yourwebsite.com\nPHOTO;VALUE=URL;TYPE=PNG:${window.location.origin}/Stallion.png\nEND:VCARD`;
+  
+          // Create a Blob and trigger a download
+          const blob = new Blob([vCardData], { type: 'text/vcard' });
+          const url = window.URL.createObjectURL(blob);
+  
+          // Create a temporary link element and trigger a click to download
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'DeLisa_Bonaparte.vcf';
+          a.click();
+  
+          // Clean up
+          window.URL.revokeObjectURL(url);
+      }
+    </script>
+  
+  
 </body>
 </html>

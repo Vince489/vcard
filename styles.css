@@ -1,0 +1,12 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+#app {
+  text-align: center;
+  padding: 20px;
+}
+
+#result {
+  margin-top: 20px;
+}
