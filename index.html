@@ -81,24 +81,28 @@
     </div>
 
     <script>
-      function downloadVCard() {
-          // vCard data with PHOTO property pointing to the profile picture URL
-          const vCardData = `BEGIN:VCARD\nVERSION:3.0\nFN:DeLisa Bonaparte\nORG:Patricia's Rock\nEMAIL:your.email@example.com\nTEL:(123) 456-7890\nURL:www.yourwebsite.com\nPHOTO;VALUE=URL;TYPE=PNG:${window.location.origin}/Stallion.png\nEND:VCARD`;
-  
-          // Create a Blob and trigger a download
-          const blob = new Blob([vCardData], { type: 'text/vcard' });
-          const url = window.URL.createObjectURL(blob);
-  
-          // Create a temporary link element and trigger a click to download
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'DeLisa_Bonaparte.vcf';
-          a.click();
-  
-          // Clean up
-          window.URL.revokeObjectURL(url);
-      }
+        function downloadVCard() {
+            // Profile picture in base64 format
+            const profilePicBase64 = '...'; // Replace '...' with the base64-encoded image data
+    
+            // vCard data with embedded PHOTO property
+            const vCardData = `BEGIN:VCARD\nVERSION:3.0\nFN:DeLisa Bonaparte\nORG:Patricia's Rock\nEMAIL:your.email@example.com\nTEL:(123) 456-7890\nURL:www.yourwebsite.com\nPHOTO;ENCODING=b;TYPE=PNG:${profilePicBase64}\nEND:VCARD`;
+    
+            // Create a Blob and trigger a download
+            const blob = new Blob([vCardData], { type: 'text/vcard' });
+            const url = window.URL.createObjectURL(blob);
+    
+            // Create a temporary link element and trigger a click to download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'DeLisa_Bonaparte.vcf';
+            a.click();
+    
+            // Clean up
+            window.URL.revokeObjectURL(url);
+        }
     </script>
+    
   
   
 </body>
