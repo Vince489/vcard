@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Business Card</title>
+    <style>
+        body {
+            margin: 0;
+            /* padding: 0;
+            box-sizing: border-box; */
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .card {
+            /* max-width: 300px; */
+            width: 100%;
+            /* max-height: 600px; */
+            height: 100%;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .profile-pic {
+            max-width: 60%;
+            border-radius: 50%;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        p {
+            color: #666;
+        }
+
+        .download-btn {
+            background-color: #4c84af;
+            color: #fff;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        .qrc {
+          padding: 20px;
+          width: 100px;
+          height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <img src="https://virtronesports.com/img/Stallion.png" alt="Profile Picture" class="profile-pic">
+        <h1>DeLisa Bonaparte</h1>
+        <p>Mental Health Counselor</p>
+        <h2>Patricia's Rock</h2>
+        <p>Contact: your.email@example.com</p>
+        <p>Phone: (123) 456-7890</p>
+        <p>Website: www.yourwebsite.com</p>
+        <!-- Create a download link -->
+        <div>
+          <img class="qrc" src="./qrc.png" alt="QRC">
+        </div>
+
+        <a href="#" id="download-link" class="download-btn" onclick="downloadVCard()">Add to Contacts</a>
+
+    </div>
+
+    <script>
+        function downloadVCard() {
+            // Profile picture in base64 format
+            const profilePicBase64 = '...'; // Replace '...' with the base64-encoded image data
+    
+            // vCard data with embedded PHOTO property
+            const vCardData = `BEGIN:VCARD\nVERSION:3.0\nFN:DeLisa Bonaparte\nORG:Patricia's Rock\nEMAIL:your.email@example.com\nTEL:(123) 456-7890\nURL:www.yourwebsite.com\nPHOTO;ENCODING=b;TYPE=PNG:${profilePicBase64}\nEND:VCARD`;
+    
+            // Create a Blob and trigger a download
+            const blob = new Blob([vCardData], { type: 'text/vcard' });
+            const url = window.URL.createObjectURL(blob);
+    
+            // Create a temporary link element and trigger a click to download
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'DeLisa_Bonaparte.vcf';
+            a.click();
+    
+            // Clean up
+            window.URL.revokeObjectURL(url);
+        }
+    </script>
+    
+  
+  
+</body>
+</html>
